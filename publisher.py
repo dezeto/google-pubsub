@@ -11,7 +11,7 @@ publisher = pubsub_v1.PublisherClient()
 topic_path = ""
 topic_path = os.getenv("TOPIC_PATH")
 
-data = "Harry Potter"
+data = "Book"
 data = data.encode('utf-8')
 attributes = {
     'book_name': 'helicopter',

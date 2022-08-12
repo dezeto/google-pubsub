@@ -8,7 +8,7 @@ load_dotenv(verbose=True)
 credential_path = os.getenv("CREDENTIAL_PATH")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
-timeout = 5.0
+timeout = float(os.getenv("TIMEOUT", 5.0))
 
 subscriber = pubsub_v1.SubscriberClient()
 subcription_path = os.getenv("SUBSCRIPTION_PATH")
@@ -34,7 +34,7 @@ print(f"Listening for messages on {subcription_path}")
 
 with subscriber:
     try:
-        streaming_pull_future.result()
+        streaming_pull_future.result(timeout=timeout)
     except TimeoutError:
         streaming_pull_future.cancel()
         streaming_pull_future.result()
